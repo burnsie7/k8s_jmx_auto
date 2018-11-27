@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jmx-test
+  annotations:
+    ad.datadoghq.com/my-java-app.check_names: |
+      [
+        "jmx"
+      ]
+    ad.datadoghq.com/my-java-app.init_configs: |
+      [
+        {}
+      ]
+    ad.datadoghq.com/my-java-app.instances: |
+      [
+        {
+          "host": "%%host%%",
+          "port": "%%port%%"
+        }
+      ]
+  labels:
+    name: apache
+spec:
+  containers:
+    - name: my-java-app
+      image: dogdemo/my-java-app:latest
+      ports:
+        - containerPort: 7199
