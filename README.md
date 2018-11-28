@@ -1,17 +1,17 @@
 # JMX Collection using Kubernetes Annotations for Autodiscovery
 
-1.  Clone this repository and cd into the directory
+### Clone this repository and cd into the directory
 
 ```
 git clone https://github.com/burnsie7/k8s_jmx_auto.git
 cd k8s_jmx_auto
 ```
 
-1.  Configure RBAC permissions if your K8s instance is using RBAC.  More information can be found [here](https://docs.datadoghq.com/integrations/faq/using-rbac-permission-with-your-kubernetes-integration/).
+### Configure RBAC permissions if your K8s instance is using RBAC.  More information can be found [here](https://docs.datadoghq.com/integrations/faq/using-rbac-permission-with-your-kubernetes-integration/).
 
 `kubectl create -f datadog-serviceaccount.yaml`
 
-1.  Update the port and jmx_url values in the applications yaml file.
+### Update the port and jmx_url values in the applications yaml file.
 
 Please update %%port%% with the known port of jmxremote.port.
 
@@ -21,21 +21,21 @@ The `jmx_url` value is optional and should be removed if not set.  By default th
 
 If you are using a different url, please update this value.  If not, please remove.
 
-1.  Launch your application
+### Launch your application
 
 `kubectl create -f my-java-app.yaml`
 
-1.  Update <YOUR_API_KEY> in datadog-agent-jmx.yaml with a valid API key from [here](https://app.datadoghq.com/account/settings#api).
+### Update <YOUR_API_KEY> in datadog-agent-jmx.yaml with a valid API key from [here](https://app.datadoghq.com/account/settings#api).
 
-1.  Deploy Datadog JMX Agent Daemonset
+### Deploy Datadog JMX Agent Daemonset
 
 `kubectl create -f datadog-agent-jmx.yaml`
 
-1.  View containers from your kubernetes deployments on the Live Container page:
+### View containers from your kubernetes deployments on the Live Container page:
 
 https://app.datadoghq.com/containers
 
-1.  View JVM metrics in the Datadog metric explorer:
+### View JVM metrics in the Datadog metric explorer:
 
 https://app.datadoghq.com/metric/explorer?&exp_metric=jvm.cpu_load.process&exp_scope=&exp_agg=avg&exp_row_type=metric
 
