@@ -11,6 +11,17 @@ metadata:
       [
         {}
       ]
+# Example ad.datadoghq.com/my-java-app.instances: |
+# Port should always be specified if known
+# jmx_url should be specified if it does not follow: service:jmx:rmi:///jndi/rmi://%%host%%:%%port%%/jmxrmi
+#    ad.datadoghq.com/my-java-app.instances: |
+#      [
+#        {
+#          "host": "%%host%%",
+#          "port": "7199",
+#          "jmx_url": "service:jmx:rmi:///jndi/rmi://%%host%%:7199/jmxrmi"
+#        }
+#      ]
     ad.datadoghq.com/my-java-app.instances: |
       [
         {
@@ -18,6 +29,7 @@ metadata:
           "port": "%%port%%"
         }
       ]
+
     ad.datadoghq.com/my-java-app.logs: |
       [
         {
