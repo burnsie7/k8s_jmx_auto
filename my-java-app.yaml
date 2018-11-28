@@ -18,8 +18,15 @@ metadata:
           "port": "%%port%%"
         }
       ]
+    ad.datadoghq.com/my-java-app.logs: |
+      [
+        {
+          "source":"java",
+          "service":"my-java-app"
+        }
+      ]
   labels:
-    name: apache
+    name: my-java-app
 spec:
   containers:
     - name: my-java-app
