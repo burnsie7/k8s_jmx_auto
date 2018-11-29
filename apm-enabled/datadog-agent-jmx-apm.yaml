@@ -15,30 +15,32 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
+            # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
+            # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
+          - name: DD_APM_ENABLED
+            value: "true"
           - name: DD_API_KEY
-            value: <YOUR_API_KEY>
+            value: "<YOUR_API_KEY>"
+          - name: DD_COLLECT_KUBERNETES_EVENTS
+            value: "true"
+          - name: DD_LEADER_ELECTION
+            value: "true"
           - name: KUBERNETES
             value: "true"
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
-          - name: DD_LEADER_ELECTION
-            value: "true"
           # JMX Required
           - name: DD_DOGSTATSD_ORIGIN_DETECTION
             value: "true"
           - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-            value: "true"
-          - name: DD_APM_ENABLED
-            value: "true"
-          - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: SD_JMX_ENABLE
             value: "true"
@@ -67,9 +69,6 @@ spec:
           - name: cgroups
             mountPath: /host/sys/fs/cgroup
             readOnly: true
-          # Optional to store logs on host in case of network interruptions or service restarts
-          # - name: pointerdir
-          #   mountPath: /opt/datadog-agent/run
         livenessProbe:
           exec:
             command:
@@ -86,7 +85,3 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        # Optional to store logs on host in case of network interruptions or service restarts
-        # - hostPath:
-        #     path: /accessible/host/path
-        #   name: pointerdir
